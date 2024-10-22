@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="inertial_macros.xacro"/>
+    <!-- Color Blue Army -->
+    <material name="blue_army">
+        <color rgba="0.0 0.2 0.65 1.0"/>
+    </material>
+
+    <!-- Color Black for Wheels -->
+    <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+
+    <!-- Color Yellow for Sensors -->
+     <material name="yellow">
+        <color rgba="1.0 1.0 0.0 1.0"/>
+     </material>
+
+    <link name="base_link">
+
+    </link>
+
+    <!-- Chassis joint  -->
+    <joint name="chassis_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="0.0 0.0 0.0"/>
+    </joint>
+
+    <!-- Chassis Link -->
+    <link name="chassis">
+        <visual>
+            <origin 
+            xyz="0.0 0.0 0.0"
+            rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://robot_simulation/meshes/base_link.STL" />
+            </geometry>
+            <material name="blue_army"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://robot_simulation/meshes/base_link.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.8"/>
+            <inertia ixx="0.0001"
+            ixy="0.0"
+            ixz="0.0"
+            iyy="0.0003"
+            iyz="0.0"
+            izz="0.0002"/>
+        </inertial>
+    </link>
+    <gazebo reference="chassis">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!-- Left Wheel Link -->
+     <joint name="Left_Wheel_Joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="Left_Wheel_Link"/>
+        <origin
+            xyz="0.0 0.08 0.0"
+            rpy="-${pi/2} 0 0" />
+        <axis xyz="0.0 0.0 1.0"/>
+     </joint>
+
+     <link name="Left_Wheel_Link">
+        <visual>
+        <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+        <geometry>
+            <mesh
+            filename="package://robot_simulation/meshes/Left_Wheel_Link.STL" />
+        </geometry>
+        <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://robot_simulation/meshes/Left_Wheel_Link.STL"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.03"/>
+            <inertia ixx="0.0001"
+            ixy="0.0"
+            ixz="0.0"
+            iyy="0.0003"
+            iyz="0.0"
+            izz="0.0002"/>
+        </inertial>
+     </link>
+     <gazebo reference="Left_Wheel_Link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+     <!-- Right Wheel Link -->
+     <joint name="Right_Wheel_Joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="Right_Wheel_Link"/>
+        <origin
+            xyz="0.0 -0.08 0.0"
+            rpy="${pi/2} 0 0" />
+        <axis xyz="0.0 0.0 -1.0"/>
+     </joint>
+
+     <link name="Right_Wheel_Link">
+        <visual>
+        <origin
+            xyz="0 0 0"
+            rpy="0 0 0" />
+        <geometry>
+            <mesh
+            filename="package://robot_simulation/meshes/Right_Wheel_Link.STL" />
+        </geometry>
+        <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://robot_simulation/meshes/Right_Wheel_Link.STL"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.03"/>
+            <inertia ixx="0.0001"
+            ixy="0.0"
+            ixz="0.0"
+            iyy="0.0003"
+            iyz="0.0"
+            izz="0.0002"/>
+        </inertial>
+     </link>
+     <gazebo reference="Right_Wheel_Link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <!-- Casters Wheels  -->
+     <joint name="front_caster_wheel_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="front_caster_wheel_link"/>
+        <origin xyz="0.09 0.0 -0.024"/>
+     </joint>
+
+     <link name="front_caster_wheel_link">
+        <visual>
+            <geometry>
+                <sphere radius="0.01"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_sphere mass="0.005" radius="0.01">
+            <origin xyz="0.0 0.0 0.0"/>
+        </xacro:inertial_sphere>
+     </link>
+
+     <gazebo reference="front_caster_wheel_link">
+        <material>Gazebo/Orange</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>
+     </gazebo>
+     
+     <joint name="back_caster_wheel_joint" type="fixed">
+         <parent link="chassis"/>
+         <child link="back_caster_wheel_link"/>
+         <origin xyz="-0.09 0.0 -0.024"/>
+        </joint>
+        
+        <link name="back_caster_wheel_link">
+            <visual>
+                <geometry>
+                    <sphere radius="0.01"/>
+                </geometry>
+                <material name="black"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <sphere radius="0.01"/>
+                </geometry>
+            </collision>
+            <xacro:inertial_sphere mass="0.005" radius="0.01">
+                <origin xyz="0.0 0.0 0.0"/>
+            </xacro:inertial_sphere>
+        </link>
+    <gazebo reference="back_caster_wheel_link">
+        <material>Gazebo/Orange</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>
+    </gazebo>
+</robot>

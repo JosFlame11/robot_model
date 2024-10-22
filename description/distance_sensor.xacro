@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="distance_sensor" params="prefix *origin">
+
+    <!-- Define the link for the distance sensor -->
+    <link name="${prefix}_distance_sensor_link">
+      <visual>
+        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <geometry>
+          <cylinder radius="0.01" length="0.05"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <origin rpy="0.0 ${pi/2} 0.0"/>
+        <geometry>
+          <cylinder radius="0.01" length="0.05"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cylinder mass = "0.0001" length = "0.05" radius = "0.01">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 ${pi/2} 0.0"/>
+      </xacro:inertial_cylinder>
+    </link>
+    
+    <!-- Attach the distance sensor link to the base link -->
+    <joint name="${prefix}_distance_sensor_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${prefix}_distance_sensor_link"/>
+      <xacro:insert_block name="origin"/> <!-- Adjust position based on where you want the sensor -->
+    </joint>
+    
+    <!-- Add the Gazebo sensor plugin for a distance sensor -->
+    <gazebo reference="${prefix}_distance_sensor_link">
+      <material>
+        Gazebo/Yellow
+      </material>
+      <sensor type="ray" name="${prefix}_distance_sensor">
+        <pose>0 0 0 0 0 0</pose> <!-- Relative pose of the sensor -->
+        <visualize>true</visualize> <!-- Show the sensor rays in Gazebo -->
+        <update_rate>10</update_rate> <!-- Rate at which the sensor updates (Hz) -->
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>5</samples> <!-- Single ray, 1D distance sensor -->
+              <resolution>1</resolution>
+              <min_angle> -0.01 </min_angle>
+              <max_angle> 0.01 </max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.055</min> <!-- Minimum measurable distance (meters) -->
+            <max>5.0</max> <!-- Maximum measurable distance (meters) -->
+            <resolution>0.01</resolution> <!-- Distance resolution -->
+          </range>
+        </ray>
+        
+        <!-- Gazebo plugin to interface with ROS 2 -->
+        <plugin name="${prefix}_gazebo_ros_ray_sensor" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>/${prefix}_gazebo_ros_ray_sensor/out:=/distance_sensor_${prefix}/scan</remapping> <!-- Topic remapping -->
+          </ros>
+          <frameName>${prefix}_distance_sensor_link</frameName> <!-- The sensor frame -->
+          <output_type>sensor_msgs/LaserScan</output_type> <!-- Specify the output message type -->
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+    
+  </robot>

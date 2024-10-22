@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot" >
+
+    <xacro:include filename="inertial_macros.xacro"/>
+    <xacro:include filename="distance_sensor.xacro"/>
+
+    <xacro:include filename="robot_core.xacro"/>
+    
+    <xacro:include filename="ros2_control.xacro"/>
+    <!-- <xacro:include filename="gazebo_control.xacro"/> -->
+
+    <xacro:include filename="camera.xacro"/>
+
+    <!-- <xacro:include filename="imu.xacro"/> -->
+
+    <xacro:distance_sensor prefix="front">
+        <origin xyz="0.09 0.0 0.005"/>
+    </xacro:distance_sensor>
+
+    <xacro:distance_sensor prefix="left">
+        <origin xyz="0.065 0.065 0.005" rpy="0.0 0.0 ${pi/4}"/>
+    </xacro:distance_sensor>
+
+    <xacro:distance_sensor prefix="right">
+        <origin xyz="0.065 -0.065 0.005" rpy="0.0 0.0 ${-pi/4}"/>
+    </xacro:distance_sensor>
+</robot>

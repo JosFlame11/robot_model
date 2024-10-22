@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20241006-0700-Experimental"
+	Name="josflame11-pc"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/g++"
+	CompilerVersion="11.4.0"
+	OSName="Linux"
+	Hostname="josflame11-pc"
+	OSRelease="6.8.0-45-generic"
+	OSVersion="#45~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep 11 15:25:05 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="25"
+	ModelID="33"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="6"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="15897"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="3658.66"
+	>
+	<Testing>
+		<StartDateTime>Oct 06 01:00 CST</StartDateTime>
+		<StartTestTime>1728198047</StartTestTime>
+		<TestList/>
+		<EndDateTime>Oct 06 01:00 CST</EndDateTime>
+		<EndTestTime>1728198047</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
