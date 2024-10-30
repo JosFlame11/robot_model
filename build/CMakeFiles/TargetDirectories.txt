@@ -1,9 +1,0 @@
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/uninstall.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/robot_simulation_uninstall.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/test.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/edit_cache.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/rebuild_cache.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/list_install_components.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/install.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/install/local.dir
-/home/josflame11/learning_ws/src/robot_simulation/build/CMakeFiles/install/strip.dir
